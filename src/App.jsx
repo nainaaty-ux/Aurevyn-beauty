@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
+import ScrollToTop from "./ScrollToTop";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -13,26 +15,18 @@ import Wishlist from "./pages/Wishlist";
 import About from "./pages/About";
 
 export default function App() {
-
   const [cart, setCart] = useState(() =>
-    JSON.parse(
-      localStorage.getItem("aurevyn-cart") || "[]"
-    )
+    JSON.parse(localStorage.getItem("aurevyn-cart") || "[]")
   );
 
   const [wishlist, setWishlist] = useState(() =>
-    JSON.parse(
-      localStorage.getItem("aurevyn-wishlist") || "[]"
-    )
+    JSON.parse(localStorage.getItem("aurevyn-wishlist") || "[]")
   );
 
   const [toast, setToast] = useState("");
 
   useEffect(() => {
-    localStorage.setItem(
-      "aurevyn-cart",
-      JSON.stringify(cart)
-    );
+    localStorage.setItem("aurevyn-cart", JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
@@ -42,9 +36,7 @@ export default function App() {
     );
   }, [wishlist]);
 
-
   // TOAST FUNCTION
-
   const showToast = (message) => {
     setToast(message);
 
@@ -53,19 +45,14 @@ export default function App() {
     }, 2500);
   };
 
-
   // ADD TO CART
-
   const add = (product, qty = 1) => {
-
     setCart((currentCart) => {
-
       const found = currentCart.find(
         (item) => item.id === product.id
       );
 
       if (found) {
-
         return currentCart.map((item) =>
           item.id === product.id
             ? {
@@ -74,7 +61,6 @@ export default function App() {
               }
             : item
         );
-
       }
 
       return [
@@ -84,17 +70,13 @@ export default function App() {
           qty,
         },
       ];
-
     });
 
     showToast("✨ Added to your bag");
   };
 
-
   // UPDATE CART
-
   const update = (id, qty) => {
-
     setCart((currentCart) =>
       currentCart.map((item) =>
         item.id === id
@@ -105,92 +87,56 @@ export default function App() {
           : item
       )
     );
-
   };
 
-
   // REMOVE FROM CART
-
   const remove = (id) => {
-
     setCart((currentCart) =>
-      currentCart.filter(
-        (item) => item.id !== id
-      )
+      currentCart.filter((item) => item.id !== id)
     );
 
     showToast("🛍️ Removed from your bag");
-
   };
 
-
   // WISHLIST
-
   const toggle = (id) => {
-
     setWishlist((currentWishlist) => {
-
-      const alreadyAdded =
-        currentWishlist.includes(id);
+      const alreadyAdded = currentWishlist.includes(id);
 
       if (alreadyAdded) {
-
-        showToast(
-          "♡ Removed from wishlist"
-        );
+        showToast("♡ Removed from wishlist");
 
         return currentWishlist.filter(
           (itemId) => itemId !== id
         );
-
       }
 
-      showToast(
-        "♡ Added to wishlist"
-      );
+      showToast("♡ Added to wishlist");
 
-      return [
-        ...currentWishlist,
-        id,
-      ];
-
+      return [...currentWishlist, id];
     });
-
   };
-
 
   // CLEAR CART
-
   const clear = () => {
-
     setCart([]);
-
-    showToast(
-      "✨ Order placed successfully"
-    );
-
+    showToast("✨ Order placed successfully");
   };
 
-
   return (
-
     <>
-
       <Navbar
         cartCount={cart.reduce(
-          (sum, item) =>
-            sum + item.qty,
+          (sum, item) => sum + item.qty,
           0
         )}
-
-        wishlistCount={
-          wishlist.length
-        }
+        wishlistCount={wishlist.length}
       />
 
+      {/* Automatically scrolls to top when page changes */}
+      <ScrollToTop />
 
       <Routes>
-
         <Route
           path="/"
           element={
@@ -258,41 +204,22 @@ export default function App() {
 
         <Route
           path="/about"
-          element={
-            <About />
-          }
+          element={<About />}
         />
-
       </Routes>
-
 
       <Footer />
 
-
       {/* TOAST */}
-
       {toast && (
-
         <div className="toast">
+          <span>{toast}</span>
 
-          <span>
-            {toast}
-          </span>
-
-          <button
-            onClick={() =>
-              setToast("")
-            }
-          >
+          <button onClick={() => setToast("")}>
             ×
           </button>
-
         </div>
-
       )}
-
     </>
-
   );
-
 }
