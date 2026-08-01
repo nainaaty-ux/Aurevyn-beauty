@@ -13,7 +13,7 @@ window.scrollTo(0, 0);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/Aurevyn-beauty">
       <App />
     </BrowserRouter>
   </React.StrictMode>
