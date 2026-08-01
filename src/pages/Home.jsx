@@ -8,7 +8,6 @@ import ProductCard from "../components/ProductCard";
 export default function Home({ onAdd, onWishlist, wishlist }) {
   return (
     <main>
-
       {/* HERO SECTION */}
       <motion.section
         className="hero"
@@ -16,7 +15,6 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-
         <motion.div
           className="hero-copy"
           initial={{ opacity: 0, x: -50 }}
@@ -64,9 +62,7 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
             alt="Luxury cosmetics"
           />
         </motion.div>
-
       </motion.section>
-
 
       {/* SHOP BY RITUAL */}
       <motion.section
@@ -76,16 +72,10 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-
         <div className="section-head">
           <div>
-            <p className="eyebrow">
-              SHOP BY RITUAL
-            </p>
-
-            <h2>
-              Find your beauty edit
-            </h2>
+            <p className="eyebrow">SHOP BY RITUAL</p>
+            <h2>Find your beauty edit</h2>
           </div>
 
           <Link className="text-btn" to="/shop">
@@ -94,11 +84,8 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
           </Link>
         </div>
 
-
         <div className="category-grid">
-
           {categories.map((category, index) => (
-
             <motion.div
               key={category.name}
               initial={{ opacity: 0, y: 30 }}
@@ -106,45 +93,33 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
               viewport={{ once: true }}
               transition={{
                 duration: 0.5,
-                delay: index * 0.1
+                delay: index * 0.1,
               }}
             >
-
               <Link
                 className="category-card"
                 to={`/shop?category=${category.name}`}
               >
-
                 <img
                   src={category.image}
                   alt={category.name}
                 />
 
                 <div>
-                  <h3>
-                    {category.name}
-                  </h3>
+                  <h3>{category.name}</h3>
 
-                  <p>
-                    {category.subtitle}
-                  </p>
+                  <p>{category.subtitle}</p>
 
                   <span>
                     Explore
                     <ArrowRight size={15} />
                   </span>
                 </div>
-
               </Link>
-
             </motion.div>
-
           ))}
-
         </div>
-
       </motion.section>
-
 
       {/* CUSTOMER FAVOURITES */}
       <motion.section
@@ -154,9 +129,7 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-
         <div className="section-head">
-
           <div>
             <p className="eyebrow">
               CUSTOMER FAVOURITES
@@ -171,14 +144,10 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
             Shop all
             <ArrowRight size={16} />
           </Link>
-
         </div>
 
-
         <div className="product-grid">
-
           {products.slice(0, 4).map((product, index) => (
-
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 40 }}
@@ -186,25 +155,19 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
               viewport={{ once: true }}
               transition={{
                 duration: 0.5,
-                delay: index * 0.1
+                delay: index * 0.1,
               }}
             >
-
               <ProductCard
                 product={product}
                 onAdd={onAdd}
                 onWishlist={onWishlist}
                 isWishlisted={wishlist.includes(product.id)}
               />
-
             </motion.div>
-
           ))}
-
         </div>
-
       </motion.section>
-
 
       {/* RITUAL BANNER */}
       <motion.section
@@ -214,35 +177,28 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-
           <p className="eyebrow">
-            THE LUMÉRA RITUAL
+            THE AUREVYN RITUAL
           </p>
 
           <h2>
             Beauty is not a destination.
             <br />
-            <em>
-              It is a moment you make yours.
-            </em>
+            <em>It is a moment you make yours.</em>
           </h2>
 
           <Link className="btn light" to="/about">
             Our story
             <ArrowRight size={17} />
           </Link>
-
         </motion.div>
-
       </motion.section>
-
 
       {/* TESTIMONIAL */}
       <motion.section
@@ -252,7 +208,6 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-
         <p className="eyebrow">
           THE GLOW COMMUNITY
         </p>
@@ -264,25 +219,17 @@ export default function Home({ onAdd, onWishlist, wishlist }) {
         </h2>
 
         <div className="stars">
-
           {[1, 2, 3, 4, 5].map((star) => (
-
             <Star
               key={star}
               fill="currentColor"
               size={18}
             />
-
           ))}
-
         </div>
 
-        <p>
-          — A LUMÉRA customer
-        </p>
-
+        <p>— An AUREVYN customer</p>
       </motion.section>
-
     </main>
   );
 }
